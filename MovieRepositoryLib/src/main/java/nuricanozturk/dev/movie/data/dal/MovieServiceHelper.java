@@ -1,8 +1,7 @@
 package nuricanozturk.dev.movie.data.dal;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import nuricanozturk.dev.movie.data.entity.Movie;
-import nuricanozturk.dev.movie.data.repository.IMovieRepository;
+import nuricanozturk.dev.movie.data.entity.jdbc.Movie;
+import nuricanozturk.dev.movie.data.repository.jdbc.IMovieRepository;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
@@ -40,5 +39,12 @@ public class MovieServiceHelper
     {
         return m_movieRepository.getMoviesWithMonthAndYear(month, year);
     }
-
+    public Iterable<Movie> getMoviesBetweenYears(int begin, int end)
+    {
+        return m_movieRepository.getMoviesBetweenYears(begin, end);
+    }
+    public Iterable<Movie> getMoviesByDirectorId(int id)
+    {
+        return m_movieRepository.getMoviesByDirectorId(id);
+    }
 }

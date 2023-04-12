@@ -1,7 +1,6 @@
-package nuricanozturk.dev.movie.data.repository;
+package nuricanozturk.dev.movie.data.repository.jdbc;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import nuricanozturk.dev.movie.data.entity.Movie;
+import nuricanozturk.dev.movie.data.entity.jdbc.Movie;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -13,7 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
-import static nuricanozturk.dev.movie.data.repository.Query.*;
+import static nuricanozturk.dev.movie.data.repository.jdbc.Query.*;
 import static nuricanozturk.dev.movie.data.BeanName.MOVIE_REPOSITORY;
 
 @Repository(MOVIE_REPOSITORY)
@@ -69,6 +68,31 @@ public class MovieRepository implements IMovieRepository
         paramMap.put("mon", month);
 
         m_namedParameterJdbcTemplate.query(SQL_MOVIE_SCENE_DATE_MONTH_YEAR_QUERY.getQuery(), paramMap, (ResultSet rs) -> fillMovies(rs, movies));
+
+        return movies;
+    }
+
+    @Override
+    public Iterable<Movie> getMoviesBetweenYears(int begin, int end) {
+        var movies = new ArrayList<Movie>();
+        var paramMap = new HashMap<String, Object>();
+
+        paramMap.put("b", begin);
+        paramMap.put("e", end);
+
+        m_namedParameterJdbcTemplate.query(SQL_MOVIE_SCENE_DATE_BETWEEN_YEAR_QUERY.getQuery(), paramMap, (ResultSet rs) -> fillMovies(rs, movies));
+
+        return movies;
+    }
+
+    @Override
+    public Iterable<Movie> getMoviesByDirectorId(int id)
+    {
+        var movies = new ArrayList<Movie>();
+        var paramMap = new HashMap<String, Object>();
+
+        paramMap.put("id", id);
+        m_namedParameterJdbcTemplate.query(SQL_MOVIE_BY_DIRECTOR_ID_QUERY.getQuery(), paramMap, (ResultSet rs) -> fillMovies(rs, movies));
 
         return movies;
     }

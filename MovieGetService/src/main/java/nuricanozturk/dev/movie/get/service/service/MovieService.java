@@ -1,6 +1,7 @@
 package nuricanozturk.dev.movie.get.service.service;
 
 import nuricanozturk.dev.movie.data.dal.MovieServiceHelper;
+import nuricanozturk.dev.movie.data.entity.jdbc.Movie;
 import nuricanozturk.dev.movie.get.service.dto.MoviesWithoutIdDTO;
 import nuricanozturk.dev.movie.get.service.mapper.IMovieWithoutIdMapper;
 import org.springframework.stereotype.Service;
@@ -35,7 +36,18 @@ public class MovieService
         return m_movieWithoutIdMapper.toMoviesWithoutIdDTO(toList(m_movieServiceHelper.getMoviesWithYear(year), m_movieWithoutIdMapper::toMovieWithoutIdDTO));
     }
 
-    public MoviesWithoutIdDTO getMoviesWithMonthAndYear(int month, int year) {
+    public MoviesWithoutIdDTO getMoviesWithMonthAndYear(int month, int year)
+    {
         return m_movieWithoutIdMapper.toMoviesWithoutIdDTO(toList(m_movieServiceHelper.getMoviesWithMonthAndYear(month,year), m_movieWithoutIdMapper::toMovieWithoutIdDTO));
+    }
+
+    public MoviesWithoutIdDTO getMoviesBetweenYears(int begin, int end)
+    {
+        return m_movieWithoutIdMapper.toMoviesWithoutIdDTO(toList(m_movieServiceHelper.getMoviesBetweenYears(begin,end), m_movieWithoutIdMapper::toMovieWithoutIdDTO));
+    }
+
+    public MoviesWithoutIdDTO getMoviesByDirectorId(int id)
+    {
+        return m_movieWithoutIdMapper.toMoviesWithoutIdDTO(toList(m_movieServiceHelper.getMoviesByDirectorId(id), m_movieWithoutIdMapper::toMovieWithoutIdDTO));
     }
 }

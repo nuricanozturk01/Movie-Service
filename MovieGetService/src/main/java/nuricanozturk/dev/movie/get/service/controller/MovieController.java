@@ -22,6 +22,7 @@ public class MovieController
     {
         return m_movieService.getCount();
     }
+
     @GetMapping("find/sdate/month")
     public MoviesWithoutIdDTO getMoviesWithMonth(@RequestParam("m") int m)
     {
@@ -36,6 +37,17 @@ public class MovieController
     public MoviesWithoutIdDTO getMoviesWithMonthAndYear(@RequestParam("y") int y, @RequestParam("m") int m)
     {
         return m_movieService.getMoviesWithMonthAndYear(m, y);
+    }
+
+    @GetMapping("find/sdate/year/between")
+    public MoviesWithoutIdDTO getMoviesBetweenYears(@RequestParam("begin") int begin, @RequestParam("end") int end)
+    {
+        return m_movieService.getMoviesBetweenYears(begin, end);
+    }
+    @GetMapping("find/director")
+    public MoviesWithoutIdDTO getMoviesByDirectorId(@RequestParam("id") int id)
+    {
+        return m_movieService.getMoviesByDirectorId(id);
     }
 
 }

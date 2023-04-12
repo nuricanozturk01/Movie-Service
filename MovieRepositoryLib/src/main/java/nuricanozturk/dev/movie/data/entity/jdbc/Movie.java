@@ -1,14 +1,33 @@
-package nuricanozturk.dev.movie.get.service.dto;
+package nuricanozturk.dev.movie.data.entity.jdbc;
 
 import java.time.LocalDate;
 
-public class MovieWithoutIdDTO
+public class Movie
 {
+    private long movie_id;
     private String name;
     private LocalDate scene_date;
     private int rating;
     private double cost;
     private float imdb;
+
+    public Movie(long movie_id, String name, LocalDate scene_date, int rating, double cost, float imdb)
+    {
+        this.movie_id = movie_id;
+        this.name = name;
+        this.scene_date = scene_date;
+        this.rating = rating;
+        this.cost = cost;
+        this.imdb = imdb;
+    }
+
+    public long getMovie_id() {
+        return movie_id;
+    }
+
+    public void setMovie_id(long movie_id) {
+        this.movie_id = movie_id;
+    }
 
     public String getName() {
         return name;
