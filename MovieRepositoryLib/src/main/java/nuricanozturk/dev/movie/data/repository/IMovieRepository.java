@@ -8,4 +8,5 @@ public interface IMovieRepository extends ICrudRepository<Movie, Long>
     Iterable<Movie> getMoviesWithMonth(int mon);
 
     Iterable<Movie> getMoviesWithYear(int year);
+    Iterable<Movie> getMoviesWithMonthAndYear(int month, int year);
 }

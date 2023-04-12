@@ -35,4 +35,10 @@ public class MovieServiceHelper
     {
         return m_movieRepository.getMoviesWithYear(year);
     }
+
+    public Iterable<Movie> getMoviesWithMonthAndYear(int month, int year)
+    {
+        return m_movieRepository.getMoviesWithMonthAndYear(month, year);
+    }
+
 }

@@ -60,6 +60,19 @@ public class MovieRepository implements IMovieRepository
         return movies;
     }
 
+    @Override
+    public Iterable<Movie> getMoviesWithMonthAndYear(int month, int year) {
+        var movies = new ArrayList<Movie>();
+        var paramMap = new HashMap<String, Object>();
+
+        paramMap.put("year", year);
+        paramMap.put("mon", month);
+
+        m_namedParameterJdbcTemplate.query(SQL_MOVIE_SCENE_DATE_MONTH_YEAR_QUERY.getQuery(), paramMap, (ResultSet rs) -> fillMovies(rs, movies));
+
+        return movies;
+    }
+
     private void fillMovies(ResultSet rs, List<Movie> movies) throws SQLException
     {
         do
