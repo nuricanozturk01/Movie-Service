@@ -18,7 +18,7 @@ public class MoviePostServiceController
         m_service = service;
     }
 
-    @PostMapping("/movie/save")
+    @PostMapping("movie/save")
     public Movie saveMovie(@RequestBody Movie movie)
     {
        return m_service.saveMovie(movie);

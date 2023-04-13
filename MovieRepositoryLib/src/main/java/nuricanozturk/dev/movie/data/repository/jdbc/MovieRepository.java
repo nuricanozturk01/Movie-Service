@@ -125,9 +125,9 @@ public class MovieRepository implements IMovieRepository
         movie.setMovie_id(count + 1);
 
         var paramSource = new BeanPropertySqlParameterSource(movie);
-        paramSource.registerSqlType("id", Types.BIGINT);
+        paramSource.registerSqlType("movie_id", Types.BIGINT);
         paramSource.registerSqlType("name", Types.VARCHAR);
-        paramSource.registerSqlType("date", Types.DATE);
+        paramSource.registerSqlType("scene_date", Types.DATE);
         paramSource.registerSqlType("rating", Types.BIGINT);
         paramSource.registerSqlType("cost", Types.REAL);
         paramSource.registerSqlType("imdb", Types.FLOAT);
