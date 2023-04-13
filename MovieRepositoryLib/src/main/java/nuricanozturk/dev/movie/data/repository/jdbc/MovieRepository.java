@@ -1,12 +1,15 @@
 package nuricanozturk.dev.movie.data.repository.jdbc;
 
+import aj.org.objectweb.asm.Type;
 import nuricanozturk.dev.movie.data.entity.jdbc.Movie;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -115,7 +118,24 @@ public class MovieRepository implements IMovieRepository
 
         return new Movie(movieId, name, sceneDate, rate, cost, imdb);
     }
+    @Override
+    public <S extends Movie> S save(S movie)
+    {
+        var count = count();
+        movie.setMovie_id(count + 1);
 
+        var paramSource = new BeanPropertySqlParameterSource(movie);
+        paramSource.registerSqlType("id", Types.BIGINT);
+        paramSource.registerSqlType("name", Types.VARCHAR);
+        paramSource.registerSqlType("date", Types.DATE);
+        paramSource.registerSqlType("rating", Types.BIGINT);
+        paramSource.registerSqlType("cost", Types.REAL);
+        paramSource.registerSqlType("imdb", Types.FLOAT);
+
+        m_namedParameterJdbcTemplate.update(SQL_MOVIE_SAVE_QUERY.getQuery(), paramSource);
+
+        return movie;
+    }
 
     //----------------------------------------------------------------------------------------------------
 
@@ -173,11 +193,7 @@ public class MovieRepository implements IMovieRepository
         throw new UnsupportedOperationException();
     }
 
-    @Override
-    public <S extends Movie> S save(S entity)
-    {
-        throw new UnsupportedOperationException();
-    }
+
 
     @Override
     public <S extends Movie> Iterable<S> saveAll(Iterable<S> entities)

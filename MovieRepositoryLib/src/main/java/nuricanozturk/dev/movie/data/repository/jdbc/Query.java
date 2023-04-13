@@ -10,7 +10,9 @@ public enum Query
     SQL_MOVIE_BY_DIRECTOR_ID_QUERY("""
             select * from movies as m, movies_to_director as md where m.movie_id = md.movie_id and md.director_id = :id
             """),
+    SQL_MOVIE_SAVE_QUERY("insert into movies(movie_id, name, scene_date, rating, cost, imdb) values(:id, :name, :date, :rating, :cost, :imdb)"),
     SQL_DIRECTOR_BY_MOVIE_ID_QUERY("select * from get_directors_by_movie_id(:movieId)");
+
 
     private final String m_query;
     Query(String query)

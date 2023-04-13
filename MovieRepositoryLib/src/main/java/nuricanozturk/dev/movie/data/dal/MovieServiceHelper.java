@@ -47,4 +47,9 @@ public class MovieServiceHelper
     {
         return m_movieRepository.getMoviesByDirectorId(id);
     }
+
+    public Movie saveMovie(Movie movie)
+    {
+        return m_movieRepository.save(movie);
+    }
 }
