@@ -12,6 +12,7 @@ public enum Query
             select * from movies as m, movies_to_director as md where m.movie_id = md.movie_id and md.director_id = :id
             """),
     SQL_MOVIE_SAVE_QUERY("insert into movies(movie_id, name, scene_date, rating, cost, imdb) values(:movie_id, :name, :scene_date, :rating, :cost, :imdb)"),
+    SQL_MOVIE_FIND_BY_ID_QUERY("select * from movies where movie_id = :id"),
     SQL_DIRECTOR_BY_MOVIE_ID_QUERY("select * from get_directors_by_movie_id(:movieId)"),
     SQL_DIRECTOR_SAVE_QUERY("insert into directors(director_id, first_name, middle_name, family_name, birth_date) values(:director_id, :first_name, :middle_name, :family_name, :birth_date)");
 

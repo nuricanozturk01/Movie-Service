@@ -1,5 +1,6 @@
 package nuricanozturk.dev.movie.get.service.controller;
 
+import nuricanozturk.dev.movie.get.service.dto.MovieWithoutIdDTO;
 import nuricanozturk.dev.movie.get.service.dto.MoviesWithoutIdDTO;
 import nuricanozturk.dev.movie.get.service.service.MovieService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,6 +49,12 @@ public class MovieController
     public MoviesWithoutIdDTO getMoviesByDirectorId(@RequestParam("id") int id)
     {
         return m_movieService.getMoviesByDirectorId(id);
+    }
+
+    @GetMapping("find/id")
+    public MovieWithoutIdDTO findById(@RequestParam("id") Long id)
+    {
+        return m_movieService.findById(id);
     }
 
 }

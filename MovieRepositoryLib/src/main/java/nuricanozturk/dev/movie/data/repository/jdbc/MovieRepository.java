@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -137,6 +138,18 @@ public class MovieRepository implements IMovieRepository
         return movie;
     }
 
+    @Override
+    public Optional<Movie> findById(Long aLong)
+    {
+        var movies = new ArrayList<Movie>();
+        var paramMap = new HashMap<String, Object>();
+
+        paramMap.put("id", aLong);
+        m_namedParameterJdbcTemplate.query(SQL_MOVIE_FIND_BY_ID_QUERY.getQuery(), paramMap, (ResultSet rs) -> fillMovies(rs, movies));
+
+        return Optional.ofNullable(movies.get(0));
+    }
+
     //----------------------------------------------------------------------------------------------------
 
     @Override
@@ -186,13 +199,6 @@ public class MovieRepository implements IMovieRepository
     {
         throw new UnsupportedOperationException();
     }
-
-    @Override
-    public Optional<Movie> findById(Long aLong)
-    {
-        throw new UnsupportedOperationException();
-    }
-
 
 
     @Override

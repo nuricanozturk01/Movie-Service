@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 import static nuricanozturk.dev.movie.data.BeanName.*;
 
 @Component(MOVIE_SERVICE_HELPER)
@@ -51,5 +53,10 @@ public class MovieServiceHelper
     public Movie saveMovie(Movie movie)
     {
         return m_movieRepository.save(movie);
+    }
+
+    public Movie findById(Long id)
+    {
+        return m_movieRepository.findById(id).orElse(null);
     }
 }

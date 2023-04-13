@@ -2,6 +2,7 @@ package nuricanozturk.dev.movie.get.service.service;
 
 import nuricanozturk.dev.movie.data.dal.MovieServiceHelper;
 import nuricanozturk.dev.movie.data.entity.jdbc.Movie;
+import nuricanozturk.dev.movie.get.service.dto.MovieWithoutIdDTO;
 import nuricanozturk.dev.movie.get.service.dto.MoviesWithoutIdDTO;
 import nuricanozturk.dev.movie.get.service.mapper.IMovieWithoutIdMapper;
 import org.springframework.stereotype.Service;
@@ -49,5 +50,10 @@ public class MovieService
     public MoviesWithoutIdDTO getMoviesByDirectorId(int id)
     {
         return m_movieWithoutIdMapper.toMoviesWithoutIdDTO(toList(m_movieServiceHelper.getMoviesByDirectorId(id), m_movieWithoutIdMapper::toMovieWithoutIdDTO));
+    }
+
+    public MovieWithoutIdDTO findById(Long id)
+    {
+        return m_movieWithoutIdMapper.toMovieWithoutIdDTO(m_movieServiceHelper.findById(id));
     }
 }

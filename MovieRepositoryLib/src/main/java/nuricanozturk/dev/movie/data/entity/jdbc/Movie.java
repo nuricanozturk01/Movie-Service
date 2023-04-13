@@ -11,6 +11,7 @@ public class Movie
     private double cost;
     private float imdb;
 
+
     public Movie(long movie_id, String name, LocalDate scene_date, int rating, double cost, float imdb)
     {
         this.movie_id = movie_id;
