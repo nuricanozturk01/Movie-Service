@@ -1,5 +1,6 @@
 package nuricanozturk.dev.movie.data.dal;
 
+import nuricanozturk.dev.movie.data.entity.jdbc.Director;
 import nuricanozturk.dev.movie.data.entity.jdbc.DirectorWithFullName;
 import nuricanozturk.dev.movie.data.repository.jdbc.IDirectorRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -21,5 +22,10 @@ public class DirectorServiceHelper
     public Iterable<DirectorWithFullName> findDirectorsByMovieId(int id)
     {
         return m_directorRepository.findDirectorsByMovieId(id);
+    }
+
+    public Director saveDirector(Director director)
+    {
+        return m_directorRepository.save(director);
     }
 }

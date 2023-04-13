@@ -5,58 +5,69 @@ import java.time.LocalDate;
 
 public class Director
 {
-    private long directorId;
-    private String firstName;
-    private String middleName;
-    private String familyName;
-    private LocalDate birthDate;
+    private long director_id;
+    private String first_name;
+    private String middle_name;
+    private String family_name;
+    private LocalDate birth_date;
     public Director() {}
-    public Director(long directorId, String firstName, String middleName, String familyName, LocalDate birthDate)
+
+    public Director(long director_id, String first_name, String middle_name, String family_name, LocalDate birth_date)
     {
-        this.directorId = directorId;
-        this.firstName = firstName;
-        this.middleName = middleName;
-        this.familyName = familyName;
-        this.birthDate = birthDate;
+        this.director_id = director_id;
+        this.first_name = first_name;
+        this.middle_name = middle_name;
+        this.family_name = family_name;
+        this.birth_date = birth_date;
     }
 
-    public long getDirectorId() {
-        return directorId;
+    public long getDirector_id()
+    {
+        return director_id;
     }
 
-    public void setDirectorId(long directorId) {
-        this.directorId = directorId;
+    public void setDirector_id(long director_id)
+    {
+        this.director_id = director_id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFirst_name()
+    {
+        return first_name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirst_name(String first_name)
+    {
+        this.first_name = first_name;
     }
 
-    public String getMiddleName() {
-        return middleName;
+    public String getMiddle_name()
+    {
+        return middle_name;
     }
 
-    public void setMiddleName(String middleName) {
-        this.middleName = middleName;
+    public void setMiddle_name(String middle_name)
+    {
+        this.middle_name = middle_name;
     }
 
-    public String getFamilyName() {
-        return familyName;
+    public String getFamily_name()
+    {
+        return family_name;
     }
 
-    public void setFamilyName(String familyName) {
-        this.familyName = familyName;
+    public void setFamily_name(String family_name)
+    {
+        this.family_name = family_name;
     }
 
-    public LocalDate getBirthDate() {
-        return birthDate;
+    public LocalDate getBirth_date()
+    {
+        return birth_date;
     }
 
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
+    public void setBirth_date(LocalDate birth_date)
+    {
+        this.birth_date = birth_date;
     }
 }

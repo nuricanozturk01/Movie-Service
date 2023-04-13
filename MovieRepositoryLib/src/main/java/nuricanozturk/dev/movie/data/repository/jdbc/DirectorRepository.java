@@ -5,11 +5,13 @@ import nuricanozturk.dev.movie.data.entity.jdbc.Director;
 import nuricanozturk.dev.movie.data.entity.jdbc.DirectorWithFullName;
 import nuricanozturk.dev.movie.data.entity.jdbc.Movie;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -34,7 +36,7 @@ public class DirectorRepository implements IDirectorRepository
     {
         var counts = new ArrayList<Long>();
 
-        m_namedParameterJdbcTemplate.query(SQL_MOVIE_COUNT_QUERY.getQuery(), rs -> {counts.add(rs.getLong(1));});
+        m_namedParameterJdbcTemplate.query(SQL_DIRECTOR_COUNT_QUERY.getQuery(), rs -> {counts.add(rs.getLong(1));});
 
         return counts.get(0);
     }
@@ -77,6 +79,22 @@ public class DirectorRepository implements IDirectorRepository
         var birthDate = rs.getDate(5).toLocalDate();
 
         return new Director(directorId, firstName, middleName, familyName, birthDate);
+    }
+    @Override
+    public <S extends Director> S save(S entity) {
+        var count = count();
+        entity.setDirector_id(count + 1);
+
+        var paramSource = new BeanPropertySqlParameterSource(entity);
+        paramSource.registerSqlType("director_id", Types.BIGINT);
+        paramSource.registerSqlType("first_name", Types.VARCHAR);
+        paramSource.registerSqlType("middle_name", Types.VARCHAR);
+        paramSource.registerSqlType("family_name", Types.VARCHAR);
+        paramSource.registerSqlType("birth_date", Types.DATE);
+
+        m_namedParameterJdbcTemplate.update(SQL_DIRECTOR_SAVE_QUERY.getQuery(), paramSource);
+
+        return entity;
     }
 
     //----------------------------------------------------------------------------------------------------
@@ -123,11 +141,6 @@ public class DirectorRepository implements IDirectorRepository
     @Override
     public Optional<Director> findById(Long aLong) {
         return Optional.empty();
-    }
-
-    @Override
-    public <S extends Director> S save(S entity) {
-        return null;
     }
 
     @Override

@@ -13,7 +13,7 @@ DIRECTOR GET SERVICE
 
 
 MOVIE POST SERVICE
-- ~/api/movies/movie/save: Bir filmi veritabanına ekleyen POST servis
+---------- ~/api/movies/movie/save: Bir filmi veritabanına ekleyen POST servis
 
 DIRECTOR POST SERVICE
 - ~/api/directors/directors/save: Bir yönetmeni veritabanına ekleyen POST servis
